@@ -14,4 +14,4 @@ const liList = ingredients.map(function (liText) {
 });
 
 const eleRef = document.querySelector("ul#ingredients");
-eleRef.append(...imgList);
+eleRef.append(...liList);
