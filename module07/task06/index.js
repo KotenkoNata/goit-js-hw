@@ -1,12 +1,15 @@
-const input = document.querySelector("#name-input");
+const input = document.querySelector("#validation-input");
 
-const output = document.querySelector("#name-output");
+input.addEventListener("focusout", function (event) {
+  const _input = event.currentTarget;
+  const nextValue = _input.value;
+  const dataLength = parseInt(_input.dataset.length);
 
-input.addEventListener("input", function (event) {
-  const nextValue = event.currentTarget.value;
-  if (nextValue === "") {
-    output.textContent = "незнакомец";
+  if (dataLength === nextValue.length) {
+    _input.classList.remove("invalid");
+    _input.classList.add("valid");
   } else {
-    output.textContent = nextValue;
+    _input.classList.remove("valid");
+    _input.classList.add("invalid");
   }
 });
