@@ -66,6 +66,8 @@ const handleImageClick = function (event) {
   jsLigthBox.classList.add('is-open');
 
   setImageForModal(src, alt, index);
+  // Listen event on keyboard buttons press
+  document.addEventListener('keydown', handleKeyboardPress);
 };
 
 jsGalleryRef.addEventListener('click', handleImageClick);
@@ -74,8 +76,7 @@ jsModalCloseBtn.addEventListener('click', closeModal);
 
 lightBoxOverlay.addEventListener('click', closeModal);
 
-// Listen event on keyboard buttons press
-document.addEventListener('keydown', function (event) {
+const handleKeyboardPress = function (event) {
   if (event.code == 'Escape') {
     closeModal(event);
     return;
@@ -89,7 +90,7 @@ document.addEventListener('keydown', function (event) {
     changeImageLeft(event);
     return;
   }
-});
+};
 
 // Changes parameters for the image inside Modal
 function setImageForModal(src, alt, index) {
@@ -105,9 +106,7 @@ function changeImageLeft() {
   if (index >= 0) {
     const imageConfig = galleryItems[index];
 
-    lightboxImage.src = imageConfig.original;
-    lightboxImage.alt = imageConfig.description;
-    lightboxImage.dataset.index = index;
+    setImageForModal(imageConfig.original, imageConfig.description, index);
   }
 }
 
@@ -118,9 +117,7 @@ function changeImageRight() {
   if (index < galleryItems.length) {
     const imageConfig = galleryItems[index];
 
-    lightboxImage.src = imageConfig.original;
-    lightboxImage.alt = imageConfig.description;
-    lightboxImage.dataset.index = index;
+    setImageForModal(imageConfig.original, imageConfig.description, index);
   }
 }
 
@@ -128,5 +125,9 @@ function changeImageRight() {
 function closeModal(event) {
   event.preventDefault();
   jsLigthBox.classList.remove('is-open');
+
+  // Listen event on keyboard buttons press
+  document.removeEventListener('keydown');
+
   setImageForModal('', '', '');
 }
