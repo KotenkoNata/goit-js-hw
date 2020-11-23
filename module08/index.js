@@ -76,7 +76,7 @@ jsModalCloseBtn.addEventListener('click', closeModal);
 
 lightBoxOverlay.addEventListener('click', closeModal);
 
-const handleKeyboardPress = function (event) {
+function handleKeyboardPress(event) {
   if (event.code == 'Escape') {
     closeModal(event);
     return;
@@ -90,7 +90,7 @@ const handleKeyboardPress = function (event) {
     changeImageLeft(event);
     return;
   }
-};
+}
 
 // Changes parameters for the image inside Modal
 function setImageForModal(src, alt, index) {
@@ -127,7 +127,7 @@ function closeModal(event) {
   jsLigthBox.classList.remove('is-open');
 
   // Listen event on keyboard buttons press
-  document.removeEventListener('keydown');
+  document.removeEventListener('keydown', handleKeyboardPress);
 
   setImageForModal('', '', '');
 }
